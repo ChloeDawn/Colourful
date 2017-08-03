@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "colourful",
+    "name": "Colourful",
+    "description": "",
+    "version": "${build_version}",
+    "mcversion": "${mcf_version}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "color": {
+      "black": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/black" } },
+      "red": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/red" } },
+      "green": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/green" } },
+      "brown": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/brown" } },
+      "blue": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/blue" } },
+      "purple": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/purple" } },
+      "cyan": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/cyan" } },
+      "silver": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/silver" } },
+      "gray": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/gray" } },
+      "pink": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/pink" } },
+      "lime": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/lime" } },
+      "yellow": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/yellow" } },
+      "light_blue": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/light_blue" } },
+      "magenta": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/magenta" } },
+      "orange": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/orange" } },
+      "white": { "textures": { "all": "colourful:blocks/bricks_terracotta/stained/white" } }
+    }
+  }
+}
