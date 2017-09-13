@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public final class WrappedModel {
 
@@ -48,7 +48,7 @@ public final class WrappedModel {
         private Item item;
         private int meta;
         private ResourceLocation resource;
-        private Set<String> variants = new HashSet<>();
+        private Set<String> variants = new TreeSet<>();
 
         public ModelBuilder(Item item, int meta) {
             this.item = item;
