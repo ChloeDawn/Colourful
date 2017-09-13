@@ -12,8 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-
 public class ItemBlockColor extends ItemBlock {
 
     public ItemBlockColor(Block block) {
@@ -29,16 +27,18 @@ public class ItemBlockColor extends ItemBlock {
         return block.getRegistryName();
     }
 
-    public void generateModels() {
+    protected void generateModels() {
         for (EnumColors color : EnumColors.values()) {
-            ModelBuilder builder = new ModelBuilder(this, color.getMetadata());
-            builder.addVariant("color=" + color.getName());
-            ModelRegistry.registerModel(builder.build());
+            ModelRegistry.registerModel(
+                    new ModelBuilder(this, color.getMetadata())
+                    .addVariant("color=" + color.getName())
+                    .build()
+            );
         }
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             for (EnumColors colors : EnumColors.values()) {
                 items.add(new ItemStack(this, 1, colors.getMetadata()));
@@ -46,7 +46,8 @@ public class ItemBlockColor extends ItemBlock {
         }
     }
 
-    @Override @Nonnull @SideOnly(Side.CLIENT)
+    @Override
+    @SideOnly(Side.CLIENT)
     public String getUnlocalizedName(ItemStack stack) {
         String color = EnumColors.getColor(stack.getMetadata()).getName();
         return super.getUnlocalizedName(stack) + "." + color;

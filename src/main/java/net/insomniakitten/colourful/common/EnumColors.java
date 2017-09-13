@@ -27,7 +27,6 @@ public enum EnumColors implements IStringSerializable {
     WHITE("dyeWhite"),
     ;
 
-    private static final String PREFIX = "tooltip.colourful.color.";
     private final String oreDict;
 
     EnumColors(String oreDict) {
@@ -49,7 +48,7 @@ public enum EnumColors implements IStringSerializable {
 
     @SideOnly(Side.CLIENT)
     public String getTooltip() {
-        return I18n.format(PREFIX + getName());
+        return I18n.format("tooltip.colourful.color." + getName());
     }
 
     public static EnumColors getColor(int meta) {

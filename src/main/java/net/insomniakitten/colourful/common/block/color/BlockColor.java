@@ -17,10 +17,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class BlockColor extends Block {
 
     public static final PropertyEnum<EnumColors> COLOR = PropertyEnum.create("color", EnumColors.class);
@@ -35,8 +33,14 @@ public class BlockColor extends Block {
         registerItemBlock();
     }
 
-    public void registerItemBlock() {
+    protected void registerItemBlock() {
         RegistryManager.registerItemBlock(new ItemBlockColor(this));
+    }
+
+    @Override
+    @Deprecated
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(COLOR, EnumColors.getColor(meta));
     }
 
     @Override
@@ -44,28 +48,21 @@ public class BlockColor extends Block {
         return state.getValue(COLOR).getMetadata();
     }
 
-    @Override @Nonnull
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(
-                COLOR, EnumColors.getColor(meta));
-    }
-
-    @Override @Nonnull
-    public ItemStack getPickBlock(
-            @Nonnull IBlockState state, RayTraceResult target,
-            @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
-        return new ItemStack(this, 1, getMetaFromState(state));
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, COLOR);
     }
 
     @Override
-    public void getDrops(@Nonnull NonNullList<ItemStack> drops, IBlockAccess world,
-                         BlockPos pos, @Nonnull IBlockState state, int fortune) {
+    public void getDrops(
+            NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(this, 1, getMetaFromState(state)));
     }
 
-    @Override @Nonnull
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, COLOR);
+    @Override
+    public ItemStack getPickBlock(
+            IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, getMetaFromState(state));
     }
 
     @Nullable

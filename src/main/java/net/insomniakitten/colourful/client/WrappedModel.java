@@ -1,26 +1,26 @@
 package net.insomniakitten.colourful.client;
 
-import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-public class WrappedModel {
+public final class WrappedModel {
 
     private final Item item;
     private final int meta;
     private final ResourceLocation resource;
     private final String variants;
+    private final ModelResourceLocation mrl;
 
-    private WrappedModel(ModelBuilder builder) {
-        this.item = builder.item;
-        this.meta = builder.meta;
-        this.resource = builder.resource;
-        StringBuilder k = new StringBuilder();
-        for (String variant : builder.variants)
-            k.append(variant).append(",");
-        this.variants = k.toString().replaceFirst("\\W$", "");
+    private WrappedModel(ModelBuilder model) {
+        this.item = model.item;
+        this.meta = model.meta;
+        this.resource = model.resource;
+        this.variants = String.join(",", model.variants);
+        this.mrl = new ModelResourceLocation(this.resource, this.variants);
     }
 
     public Item getItem() {
@@ -39,11 +39,16 @@ public class WrappedModel {
         return variants;
     }
 
-    public static class ModelBuilder {
+    public ModelResourceLocation getMRL() {
+        return mrl;
+    }
+
+    public static final class ModelBuilder {
+
         private Item item;
         private int meta;
         private ResourceLocation resource;
-        private ArrayList<String> variants = new ArrayList<>();
+        private Set<String> variants = new HashSet<>();
 
         public ModelBuilder(Item item, int meta) {
             this.item = item;
@@ -51,16 +56,8 @@ public class WrappedModel {
             this.resource = item.getRegistryName();
         }
 
-        public ModelBuilder(Block block, int meta) {
-            this(Item.getItemFromBlock(block), meta);
-        }
-
         public ModelBuilder(Item item) {
             this(item, 0);
-        }
-
-        public ModelBuilder(Block block) {
-            this(Item.getItemFromBlock(block), 0);
         }
 
         public ModelBuilder setResourceLocation(ResourceLocation resource) {
@@ -74,8 +71,9 @@ public class WrappedModel {
         }
 
         public WrappedModel build() {
-            if (variants.isEmpty())
+            if (variants.isEmpty()) {
                 variants.add("inventory");
+            }
             return new WrappedModel(this);
         }
 

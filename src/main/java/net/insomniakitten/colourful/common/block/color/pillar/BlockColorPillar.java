@@ -4,8 +4,6 @@ import net.insomniakitten.colourful.common.block.color.BlockColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumFacing;
 
-import javax.annotation.Nonnull;
-
 public class BlockColorPillar extends BlockColor {
 
     public BlockColorPillar(String name, Material material, float hardness, float resistance) {
@@ -18,7 +16,7 @@ public class BlockColorPillar extends BlockColor {
         // no-op
     }
 
-    @Override @Nonnull
+    @Override
     public String getUnlocalizedName() {
         String base = super.getUnlocalizedName();
         return base.substring(0, base.length() - 2);

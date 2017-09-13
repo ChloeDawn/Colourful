@@ -13,8 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemPaintbrush extends Item {
@@ -27,16 +25,17 @@ public class ItemPaintbrush extends Item {
         generateModels();
     }
 
-    public void generateModels() {
+    protected void generateModels() {
         for (EnumColors color : EnumColors.values()) {
-            ModelBuilder builder = new ModelBuilder(this, color.getMetadata());
-            builder.addVariant("color=" + color.getName());
-            ModelRegistry.registerModel(builder.build());
+            ModelRegistry.registerModel(new ModelBuilder(this, color.getMetadata())
+                    .addVariant("color=" + color.getName())
+                    .build()
+            );
         }
     }
 
     @Override
-    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
             for (EnumColors colors : EnumColors.values()) {
                 items.add(new ItemStack(this, 1, colors.getMetadata()));
@@ -44,9 +43,10 @@ public class ItemPaintbrush extends Item {
         }
     }
 
-    @Override @SideOnly(Side.CLIENT)
+    @Override
+    @SideOnly(Side.CLIENT)
     public void addInformation(
-            ItemStack stack, @Nullable World world,
+            ItemStack stack, World world,
             List<String> tooltip, ITooltipFlag flag) {
         EnumColors color = EnumColors.getColor(stack.getMetadata());
         tooltip.add(color.getTooltip());

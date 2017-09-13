@@ -17,7 +17,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -26,22 +25,26 @@ public class PillarResourceManager {
 
     public static final List<Block> PILLAR_SUBTYPES = new ArrayList<>();
 
-    public static void registerComponents(Block parent, String name, Material material, float hardness, float resistance) {
+    public static void registerComponents(
+            Block parent, String name, Material material,
+            float hardness, float resistance) {
         PILLAR_SUBTYPES.add(new BlockColor(name + "_x", material, hardness, resistance) {
             @Override
             public void registerItemBlock() {
                 // no-op
             }
 
-            @Override @Nonnull
-            public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target,
-                                          @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
+            @Override
+            public ItemStack getPickBlock(
+                    IBlockState state, RayTraceResult target,
+                    World world, BlockPos pos, EntityPlayer player) {
                 return new ItemStack(parent, 1, parent.getMetaFromState(state));
             }
 
             @Override
-            public void getDrops(@Nonnull NonNullList<ItemStack> drops, IBlockAccess world,
-                                 BlockPos pos, @Nonnull IBlockState state, int fortune) {
+            public void getDrops(
+                    NonNullList<ItemStack> drops, IBlockAccess world,
+                    BlockPos pos, IBlockState state, int fortune) {
                 drops.add(new ItemStack(parent, 1, parent.getMetaFromState(state)));
             }
 
@@ -56,15 +59,17 @@ public class PillarResourceManager {
                 // no-op
             }
 
-            @Override @Nonnull
-            public ItemStack getPickBlock(@Nonnull IBlockState state, RayTraceResult target,
-                                          @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player) {
+            @Override
+            public ItemStack getPickBlock(
+                    IBlockState state, RayTraceResult target,
+                    World world, BlockPos pos, EntityPlayer player) {
                 return new ItemStack(parent, 1, parent.getMetaFromState(state));
             }
 
             @Override
-            public void getDrops(@Nonnull NonNullList<ItemStack> drops, IBlockAccess world,
-                                 BlockPos pos, @Nonnull IBlockState state, int fortune) {
+            public void getDrops(
+                    NonNullList<ItemStack> drops, IBlockAccess world,
+                    BlockPos pos, IBlockState state, int fortune) {
                 drops.add(new ItemStack(parent, 1, parent.getMetaFromState(state)));
             }
 
@@ -77,10 +82,11 @@ public class PillarResourceManager {
 
     public static class StateMapperPillar extends StateMapperBase {
 
-        @Override @Nonnull @SuppressWarnings("ConstantConditions")
-        protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+        @Override
+        protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
             EnumFacing.Axis prop = ((BlockColor) state.getBlock()).getAxis();
             String axis = prop != null ? prop.getName().toLowerCase(Locale.ROOT) : "null";
+            //noinspection ConstantConditions
             String name = state.getBlock().getRegistryName().toString();
             ResourceLocation path = new ResourceLocation(name.substring(0, name.length() - 2));
             String color = EnumColors.getColor(state.getBlock().getMetaFromState(state)).getName();
