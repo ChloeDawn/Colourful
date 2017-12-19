@@ -10,12 +10,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class BlockFactory {
 
-    public static final Map<ResourceLocation, Block> ENTRIES = new HashMap<>();
+    public static final Map<ResourceLocation, Block> ENTRIES = new LinkedHashMap<>();
 
     private final ResourceLocation name;
     private final String locale;

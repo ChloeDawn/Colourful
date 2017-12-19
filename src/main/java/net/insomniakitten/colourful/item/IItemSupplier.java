@@ -5,12 +5,12 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public interface IItemSupplier<B extends ColourfulBlock> {
 
-    Map<ResourceLocation, Item> ENTRIES = new HashMap<>();
+    Map<ResourceLocation, Item> ENTRIES = new LinkedHashMap<>();
 
     SimpleBlockItem getItem();
 
