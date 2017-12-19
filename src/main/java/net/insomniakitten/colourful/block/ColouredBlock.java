@@ -5,15 +5,12 @@ import net.insomniakitten.colourful.data.ColorVariant;
 import net.insomniakitten.colourful.item.SimpleBlockItem;
 import net.insomniakitten.colourful.item.VariantBlockItem;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 public class ColouredBlock extends AbstractBlock {
-
-    public static final PropertyEnum<ColorVariant> COLOR = PropertyEnum.create("color", ColorVariant.class);
 
     private final SimpleBlockItem item = new VariantBlockItem<>(this, "color", ColorVariant.VALUES);
 
@@ -23,18 +20,18 @@ public class ColouredBlock extends AbstractBlock {
 
     @Override
     public int serialize(IBlockState state) {
-        return state.getValue(COLOR).getMetadata();
+        return state.getValue(ColorVariant.COLOR).getMetadata();
     }
 
     @Override
     public IBlockState deserialize(int meta) {
         ColorVariant color = ColorVariant.VALUES[meta];
-        return getDefaultState().withProperty(COLOR, color);
+        return getDefaultState().withProperty(ColorVariant.COLOR, color);
     }
 
     @Override
     public MapColor getColor(IBlockState state) {
-        return state.getValue(COLOR).getMapColor();
+        return state.getValue(ColorVariant.COLOR).getMapColor();
     }
 
     @Override
@@ -46,7 +43,7 @@ public class ColouredBlock extends AbstractBlock {
 
     @Override
     public void getProperties(BlockStateContainer.Builder builder) {
-        builder.add(COLOR);
+        builder.add(ColorVariant.COLOR);
     }
 
     @Override

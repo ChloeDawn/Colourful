@@ -1,7 +1,6 @@
 package net.insomniakitten.colourful.item;
 
 import com.google.common.collect.ImmutableMap;
-import net.insomniakitten.colourful.block.ColouredBlock;
 import net.insomniakitten.colourful.block.ColouredPillarBlock;
 import net.insomniakitten.colourful.client.model.PackedModel;
 import net.insomniakitten.colourful.data.ColorVariant;
@@ -47,7 +46,7 @@ public class PillarBlockItem<E extends Enum<E> & IStringSerializable> extends Va
         if (!stack.isEmpty() && player.canPlayerEdit(pos, facing, stack) && world.mayPlace(this.block, pos, false, facing, null)) {
             Block blockToPlace = getBlockFromAxis(facing.getAxis());
             IBlockState stateToPlace = blockToPlace.getDefaultState().withProperty(
-                    ColouredBlock.COLOR, ColorVariant.VALUES[stack.getMetadata()]
+                    ColorVariant.COLOR, ColorVariant.VALUES[stack.getMetadata()]
             );
             if (placeBlockAt(stack, player, world, pos, facing, hitX, hitY, hitZ, stateToPlace)) {
                 stateToPlace = world.getBlockState(pos);

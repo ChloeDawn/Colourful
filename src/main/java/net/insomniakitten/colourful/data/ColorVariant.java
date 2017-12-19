@@ -1,6 +1,7 @@
 package net.insomniakitten.colourful.data;
 
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,6 +30,8 @@ public enum ColorVariant implements IStringSerializable {
     ;
 
     public static final ColorVariant[] VALUES = ColorVariant.values();
+
+    public static final PropertyEnum<ColorVariant> COLOR = PropertyEnum.create("color", ColorVariant.class);
 
     private final String oreDict;
     private final MapColor mapColor;
