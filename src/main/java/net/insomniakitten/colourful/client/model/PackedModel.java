@@ -54,6 +54,10 @@ public final class PackedModel {
             this.addVariant(variant);
         }
 
+        public Builder(Item item, String variant) {
+            this(item, 0, variant);
+        }
+
         public Builder(Item item, int meta) {
             this.item = item;
             this.meta = meta;
