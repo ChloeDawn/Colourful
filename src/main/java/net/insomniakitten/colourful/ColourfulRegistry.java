@@ -27,9 +27,9 @@ public final class ColourfulRegistry {
 
     @SubscribeEvent
     public static void onBlockRegistry(RegistryEvent.Register<Block> event) {
-        for (BlockType type : BlockType.VALUES) {
-            for (BlockMaterial material : BlockMaterial.VALUES) {
-                for (BlockColor color : BlockColor.VALUES) {
+        for (BlockColor color : BlockColor.VALUES) {
+            for (BlockType type : BlockType.VALUES) {
+                for (BlockMaterial material : BlockMaterial.VALUES) {
                     for (BlockPattern pattern : BlockPattern.VALUES) {
                         BlockFactory.create(type, material, color, pattern).register(event);
                     }
