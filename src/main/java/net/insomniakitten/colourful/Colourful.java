@@ -1,9 +1,9 @@
 package net.insomniakitten.colourful;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +18,9 @@ public final class Colourful {
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
 
+    @GameRegistry.ItemStackHolder("colourful:green_bricks_quartz_block")
+    public static final ItemStack ICON = ItemStack.EMPTY;
+
     public static final CreativeTabs TAB = new CreativeTabs(Colourful.ID) {
         @Override
         @SideOnly(Side.CLIENT)
@@ -28,8 +31,7 @@ public final class Colourful {
         @Override
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-            // FIXME
-            return new ItemStack(Blocks.BARRIER);
+            return ICON;
         }
     };
 
