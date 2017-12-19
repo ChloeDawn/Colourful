@@ -60,8 +60,4 @@ public enum ColorVariant implements IStringSerializable {
         return I18n.format("tooltip.colourful.color." + getName());
     }
 
-    public static ColorVariant getColor(int meta) {
-        return values()[meta % values().length];
-    }
-
 }

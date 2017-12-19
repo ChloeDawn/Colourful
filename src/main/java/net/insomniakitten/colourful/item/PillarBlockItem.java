@@ -47,7 +47,7 @@ public class PillarBlockItem<E extends Enum<E> & IStringSerializable> extends Va
         if (!stack.isEmpty() && player.canPlayerEdit(pos, facing, stack) && world.mayPlace(this.block, pos, false, facing, null)) {
             Block blockToPlace = getBlockFromAxis(facing.getAxis());
             IBlockState stateToPlace = blockToPlace.getDefaultState().withProperty(
-                    ColouredBlock.COLOR, ColorVariant.getColor(stack.getMetadata())
+                    ColouredBlock.COLOR, ColorVariant.VALUES[stack.getMetadata()]
             );
             if (placeBlockAt(stack, player, world, pos, facing, hitX, hitY, hitZ, stateToPlace)) {
                 stateToPlace = world.getBlockState(pos);
