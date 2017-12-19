@@ -7,8 +7,15 @@ import net.insomniakitten.colourful.item.VariantBlockItem;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
 
 public class ColouredBlock extends AbstractBlock {
 
@@ -44,6 +51,16 @@ public class ColouredBlock extends AbstractBlock {
     @Override
     public void getProperties(BlockStateContainer.Builder builder) {
         builder.add(ColorVariant.COLOR);
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(this, 1, state.getValue(ColorVariant.COLOR).getMetadata());
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        return getDefaultState().withProperty(ColorVariant.COLOR, ColorVariant.VALUES[meta]);
     }
 
     @Override

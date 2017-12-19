@@ -44,4 +44,9 @@ public class VariantBlockItem<E extends Enum<E> & IStringSerializable> extends S
         }
     }
 
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
+
 }
