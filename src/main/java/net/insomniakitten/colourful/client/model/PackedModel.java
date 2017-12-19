@@ -1,13 +1,12 @@
-package net.insomniakitten.colourful.client;
+package net.insomniakitten.colourful.client.model;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Set;
 import java.util.TreeSet;
 
-public final class WrappedModel {
+public final class PackedModel {
 
     private final Item item;
     private final int meta;
@@ -15,7 +14,7 @@ public final class WrappedModel {
     private final String variants;
     private final ModelResourceLocation mrl;
 
-    private WrappedModel(ModelBuilder model) {
+    private PackedModel(Builder model) {
         this.item = model.item;
         this.meta = model.meta;
         this.resource = model.resource;
@@ -43,38 +42,43 @@ public final class WrappedModel {
         return mrl;
     }
 
-    public static final class ModelBuilder {
+    public static final class Builder {
 
         private Item item;
         private int meta;
         private ResourceLocation resource;
-        private Set<String> variants = new TreeSet<>();
+        private TreeSet<String> variants = new TreeSet<>();
 
-        public ModelBuilder(Item item, int meta) {
+        public Builder(Item item, int meta, String variant) {
+            this(item, meta);
+            this.addVariant(variant);
+        }
+
+        public Builder(Item item, int meta) {
             this.item = item;
             this.meta = meta;
             this.resource = item.getRegistryName();
         }
 
-        public ModelBuilder(Item item) {
+        public Builder(Item item) {
             this(item, 0);
         }
 
-        public ModelBuilder setResourceLocation(ResourceLocation resource) {
+        public Builder setResourceLocation(ResourceLocation resource) {
             this.resource = resource;
             return this;
         }
 
-        public ModelBuilder addVariant(String variant) {
+        public Builder addVariant(String variant) {
             this.variants.add(variant);
             return this;
         }
 
-        public WrappedModel build() {
+        public PackedModel build() {
             if (variants.isEmpty()) {
                 variants.add("inventory");
             }
-            return new WrappedModel(this);
+            return new PackedModel(this);
         }
 
     }
