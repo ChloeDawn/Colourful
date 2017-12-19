@@ -1,15 +1,7 @@
-# Gradle
-!gradle-wrapper.jar
-.gradle/
-build/
-compiled/
-
-# IntelliJ
-*.jar
 *.iml
+.gradle/
 .idea/
+build/
+docs/
 out/
 run/
-
-# Misc
-docs/
