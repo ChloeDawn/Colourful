@@ -52,6 +52,12 @@ public class ColourfulBlock extends Block implements IItemSupplier<ColourfulBloc
     }
 
     @Override
+    public String getUnlocalizedName() {
+        String name = super.getUnlocalizedName();
+        return name.replace("tile.", "block.");
+    }
+
+    @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this);
     }
