@@ -5,6 +5,7 @@ import net.insomniakitten.colourful.data.BlockColor;
 import net.insomniakitten.colourful.data.BlockMaterial;
 import net.insomniakitten.colourful.data.BlockPattern;
 import net.insomniakitten.colourful.data.BlockType;
+import net.insomniakitten.colourful.data.PillarAxis;
 import net.insomniakitten.colourful.item.SimpleBlockItem;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -14,17 +15,16 @@ import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class ColourfulPillarBlock extends ColourfulBlock {
 
-    private static final PropertyEnum<Axis> PROPERTY = PropertyEnum.create("axis", Axis.class);
-    private static final Axis[] VALUES = Axis.values();
+    private static final PropertyEnum<PillarAxis> PROPERTY = PropertyEnum.create("axis", PillarAxis.class);
 
     public ColourfulPillarBlock(BlockType type, BlockMaterial material, BlockColor color, BlockPattern pattern) {
         super(type, material, color, pattern);
@@ -63,7 +63,7 @@ public class ColourfulPillarBlock extends ColourfulBlock {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(PROPERTY, VALUES[meta]);
+        return getDefaultState().withProperty(PROPERTY, PillarAxis.VALUES[meta]);
     }
 
     @Override
@@ -73,14 +73,18 @@ public class ColourfulPillarBlock extends ColourfulBlock {
 
     @Override
     public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
-        IBlockState state = world.getBlockState(pos);
-        state = state.withProperty(PROPERTY, axis.getAxis());
-        return world.setBlockState(pos, state);
+        Optional<PillarAxis> pillarAxis = PillarAxis.getAxis(axis.getAxis());
+        if (pillarAxis.isPresent()) {
+            IBlockState state = world.getBlockState(pos);
+            state = state.withProperty(PROPERTY, pillarAxis.get());
+            return world.setBlockState(pos, state);
+        }
+        return false;
     }
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return getDefaultState().withProperty(PROPERTY, side.getAxis());
+        return getDefaultState().withProperty(PROPERTY, PillarAxis.getAxis(side.getAxis()).orElse(PillarAxis.Y));
     }
 
 }

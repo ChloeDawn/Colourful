@@ -1,13 +1,17 @@
 package net.insomniakitten.colourful;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import net.insomniakitten.colourful.client.model.ICustomStateMapper;
 import net.insomniakitten.colourful.client.model.IModelSupplier;
 import net.insomniakitten.colourful.data.BlockColor;
 import net.insomniakitten.colourful.data.BlockMaterial;
 import net.insomniakitten.colourful.data.BlockPattern;
 import net.insomniakitten.colourful.data.BlockType;
+import net.insomniakitten.colourful.data.PillarAxis;
 import net.insomniakitten.colourful.item.IItemSupplier;
 import net.insomniakitten.colourful.util.BlockFactory;
+import net.insomniakitten.colourful.util.JsonStateFactory;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -50,6 +54,25 @@ public final class ColourfulRegistry {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onModelRegistry(ModelRegistryEvent event) {
+        for (BlockType type : BlockType.VALUES) {
+            for (BlockMaterial material : BlockMaterial.VALUES) {
+                JsonStateFactory factory = JsonStateFactory.create(new ResourceLocation(
+                        Colourful.ID, type.getName() + "_" + material.getName()
+                ));
+                if (type == BlockType.PILLAR) {
+                    factory.build(ImmutableList.of(type.getJsonData()), ImmutableMap.of(
+                            "axis", PillarAxis.VALUES,
+                            "color", BlockColor.VALUES,
+                            "pattern", BlockPattern.VALUES
+                    ));
+                } else {
+                    factory.build(ImmutableList.of(type.getJsonData()), ImmutableMap.of(
+                            "color", BlockColor.VALUES,
+                            "pattern", BlockPattern.VALUES
+                    ));
+                }
+            }
+        }
         for (Block block : BlockFactory.ENTRIES.values()) {
             if (block instanceof ICustomStateMapper) {
                 ((ICustomStateMapper) block).register();

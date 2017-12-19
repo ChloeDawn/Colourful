@@ -1,18 +1,23 @@
 package net.insomniakitten.colourful.data;
 
+import com.google.common.collect.ImmutableMap;
 import net.insomniakitten.colourful.block.ColourfulBlock;
 import net.insomniakitten.colourful.block.ColourfulPillarBlock;
 import net.minecraft.block.Block;
-import net.minecraft.util.IStringSerializable;
 
 import java.util.Locale;
 
-public enum BlockType implements IStringSerializable {
+public enum BlockType implements IJsonData {
 
     BLOCK {
         @Override
         public Block getBlock(BlockMaterial material, BlockColor color, BlockPattern pattern) {
             return new ColourfulBlock(this, material, color, pattern);
+        }
+
+        @Override
+        public Object getJsonData() {
+            return ImmutableMap.of("model", "cube_all");
         }
     },
 
@@ -20,6 +25,10 @@ public enum BlockType implements IStringSerializable {
         @Override
         public Block getBlock(BlockMaterial material, BlockColor color, BlockPattern pattern) {
             return new ColourfulPillarBlock(this, material, color, pattern);
+        }
+        @Override
+        public Object getJsonData() {
+            return ImmutableMap.of("model", "cube_column");
         }
     };
 

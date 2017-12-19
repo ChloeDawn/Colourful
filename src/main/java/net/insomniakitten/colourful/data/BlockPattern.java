@@ -1,14 +1,41 @@
 package net.insomniakitten.colourful.data;
 
-import net.minecraft.util.IStringSerializable;
+import com.google.common.collect.ImmutableMap;
 
 import java.util.Locale;
 
-public enum BlockPattern implements IStringSerializable {
+public enum BlockPattern implements IJsonData {
 
-    NONE,
-    BRICKS,
-    CHISELED;
+    NONE {
+        @Override
+        public Object getJsonData() {
+            return ImmutableMap.of("textures", ImmutableMap.of(
+                    "all", "blocks/stone",
+                    "end", "blocks/stone",
+                    "side", "blocks/stone"
+            ));
+        }
+    },
+    BRICKS {
+        @Override
+        public Object getJsonData() {
+            return ImmutableMap.of("textures", ImmutableMap.of(
+                    "all", "blocks/stone",
+                    "end", "blocks/stone",
+                    "side", "blocks/stone"
+            ));
+        }
+    },
+    CHISELED {
+        @Override
+        public Object getJsonData() {
+            return ImmutableMap.of("textures", ImmutableMap.of(
+                    "all", "blocks/stone",
+                    "end", "blocks/stone",
+                    "side", "blocks/stone"
+            ));
+        }
+    };
 
     public static final BlockPattern[] VALUES = BlockPattern.values();
 

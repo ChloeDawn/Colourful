@@ -1,12 +1,12 @@
 package net.insomniakitten.colourful.data;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.util.IStringSerializable;
 
 import java.util.Locale;
 
-public enum BlockColor implements IStringSerializable {
+public enum BlockColor implements IJsonData {
 
     BLACK("blockColoredBlack", MapColor.BLACK, EnumDyeColor.BLACK),
     RED("blockColoredRed", MapColor.RED, EnumDyeColor.RED),
@@ -56,6 +56,11 @@ public enum BlockColor implements IStringSerializable {
 
     public int getMetadata() {
         return ordinal();
+    }
+
+    @Override
+    public Object getJsonData() {
+        return ImmutableMap.of();
     }
 
 }
