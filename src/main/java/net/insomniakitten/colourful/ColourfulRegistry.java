@@ -41,12 +41,10 @@ public final class ColourfulRegistry {
     @SubscribeEvent
     public static void onItemRegistry(RegistryEvent.Register<Item> event) {
         for (Map.Entry<ResourceLocation, Block> entry : BlockFactory.ENTRIES.entrySet()) {
-            Colourful.LOGGER.info(entry.getValue().getUnlocalizedName());
             if (entry.getValue() instanceof IItemSupplier) {
                 ((IItemSupplier) entry.getValue()).register(entry.getKey(), event);
             }
         }
-        Colourful.LOGGER.info("Total used block IDs: " + BlockFactory.ENTRIES.size());
     }
 
     @SubscribeEvent

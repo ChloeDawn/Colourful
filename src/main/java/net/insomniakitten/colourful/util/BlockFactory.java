@@ -30,7 +30,7 @@ public final class BlockFactory {
     }
 
     public static BlockFactory create(BlockType type, BlockMaterial material, BlockColor color, BlockPattern pattern) {
-        String name = color.getName() + material.getSuffix() + pattern.getSuffix() + type.getSuffix();
+        String name = color.getName() + pattern.getSuffix() + material.getSuffix() + type.getSuffix();
         Block block = type.getBlock(material, color, pattern);
         BlockFactory entry = new BlockFactory(name, Colourful.TAB, block);
         ENTRIES.putIfAbsent(entry.name, entry.block);
