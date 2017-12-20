@@ -3,8 +3,7 @@ package net.insomniakitten.colourful.util;
 import net.insomniakitten.colourful.Colourful;
 import net.insomniakitten.colourful.data.BlockColor;
 import net.insomniakitten.colourful.data.BlockMaterial;
-import net.insomniakitten.colourful.data.BlockPattern;
-import net.insomniakitten.colourful.data.BlockType;
+import net.insomniakitten.colourful.data.BlockFormat;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -19,25 +18,22 @@ public final class BlockFactory {
 
     private final ResourceLocation name;
     private final String locale;
-    private final CreativeTabs tab;
     private final Block block;
 
-    private BlockFactory(String name, CreativeTabs tab, Block block) {
+    private BlockFactory(String name, Block block) {
         this.name = new ResourceLocation(Colourful.ID, name);
         this.locale = Colourful.ID + "." + name;
-        this.tab = tab;
         this.block = block;
     }
 
-    public static BlockFactory create(BlockType type, BlockMaterial material, BlockColor color, BlockPattern pattern) {
-        String name = color.getName() + pattern.getSuffix() + material.getSuffix() + type.getSuffix();
-        Block block = type.getBlock(material, color, pattern);
-        BlockFactory entry = new BlockFactory(name, Colourful.TAB, block);
+    public static BlockFactory create(BlockFormat format, BlockMaterial material, BlockColor color) {
+        String name = color.getName() + "_" + material.getName() + "_" + format.getName();
+        BlockFactory entry = new BlockFactory(name, format.makeInstance(material, color));
         ENTRIES.putIfAbsent(entry.name, entry.block);
         return entry;
     }
 
-    public void register(RegistryEvent.Register<Block> event) {
+    public void register(CreativeTabs tab, RegistryEvent.Register<Block> event) {
         try {
             event.getRegistry().register(block
                     .setRegistryName(name)

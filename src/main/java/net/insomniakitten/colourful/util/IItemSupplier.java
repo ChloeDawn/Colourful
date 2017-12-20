@@ -1,6 +1,5 @@
-package net.insomniakitten.colourful.item;
+package net.insomniakitten.colourful.util;
 
-import net.insomniakitten.colourful.block.ColourfulBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -8,11 +7,11 @@ import net.minecraftforge.event.RegistryEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public interface IItemSupplier<B extends ColourfulBlock> {
+public interface IItemSupplier {
 
     Map<ResourceLocation, Item> ENTRIES = new LinkedHashMap<>();
 
-    SimpleBlockItem getItem();
+    Item getItem();
 
     default void register(ResourceLocation name, RegistryEvent.Register<Item> event) {
         Item item = getItem().setRegistryName(name);

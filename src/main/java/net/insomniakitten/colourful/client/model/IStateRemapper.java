@@ -6,7 +6,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public interface ICustomStateMapper {
+public interface IStateRemapper {
 
     IStateMapper getStateMapper();
 

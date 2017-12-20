@@ -1,47 +1,30 @@
 package net.insomniakitten.colourful.data;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.IStringSerializable;
 
 import java.util.Locale;
 import java.util.Optional;
 
-public enum PillarAxis implements IJsonData {
+public enum PillarAxis implements IStringSerializable {
 
-    X(EnumFacing.Axis.X) {
-        @Override
-        public Object getJsonData() {
-            return ImmutableMap.of("x", 90, "y", 90);
-        }
-    },
-
-    Y(EnumFacing.Axis.Y) {
-        @Override
-        public Object getJsonData() {
-            return ImmutableMap.of("x", 0, "y", 0);
-        }
-    },
-
-    Z(EnumFacing.Axis.Z) {
-        @Override
-        public Object getJsonData() {
-            return ImmutableMap.of("x", 90, "y", 0);
-        }
-    };
+    X(Axis.X),
+    Y(Axis.Y),
+    Z(Axis.Z);
 
     public static final PillarAxis[] VALUES = PillarAxis.values();
 
-    private final EnumFacing.Axis facingAxis;
+    private final Axis facingAxis;
 
-    PillarAxis(EnumFacing.Axis facingAxis) {
+    PillarAxis(Axis facingAxis) {
         this.facingAxis = facingAxis;
     }
 
-    public EnumFacing.Axis getFacingAxis() {
+    public Axis getFacingAxis() {
         return facingAxis;
     }
 
-    public static Optional<PillarAxis> getAxis(EnumFacing.Axis axis) {
+    public static Optional<PillarAxis> getAxis(Axis axis) {
         for (PillarAxis pillarAxis : VALUES) {
             if (pillarAxis.facingAxis == axis) {
                 return Optional.of(pillarAxis);

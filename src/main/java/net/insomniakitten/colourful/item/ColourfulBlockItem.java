@@ -1,6 +1,7 @@
 package net.insomniakitten.colourful.item;
 
 import net.insomniakitten.colourful.block.ColourfulBlock;
+import net.insomniakitten.colourful.client.color.IColorSupplier;
 import net.insomniakitten.colourful.client.model.IModelSupplier;
 import net.insomniakitten.colourful.client.model.PackedModel;
 import net.minecraft.client.resources.I18n;
@@ -14,9 +15,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Set;
 
-public class SimpleBlockItem extends ItemBlock implements IModelSupplier {
+public class ColourfulBlockItem extends ItemBlock implements IModelSupplier, IColorSupplier {
 
-    public SimpleBlockItem(ColourfulBlock block) {
+    public ColourfulBlockItem(ColourfulBlock block) {
         super(block);
     }
 
@@ -31,6 +32,12 @@ public class SimpleBlockItem extends ItemBlock implements IModelSupplier {
     @Override
     public void addModels(Set<PackedModel> models) {
         models.add(new PackedModel.Builder(this, "normal").build());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getColor() {
+        return ((ColourfulBlock) block).getColor();
     }
 
 }

@@ -1,0 +1,29 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "colourful:tinted_cube",
+        "textures": {
+            "all": "colourful:blocks/block"
+        }
+    },
+    "variants": {
+        "color": {
+            "magenta": { },
+            "pink": { },
+            "green": { },
+            "light_gray": { },
+            "lime": { },
+            "black": { },
+            "yellow": { },
+            "light_blue": { },
+            "brown": { },
+            "cyan": { },
+            "red": { },
+            "orange": { },
+            "gray": { },
+            "blue": { },
+            "white": { },
+            "purple": { }
+        }
+    }
+}

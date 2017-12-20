@@ -1,8 +1,7 @@
-package net.insomniakitten.colourful.util;
+package net.insomniakitten.colourful.util.dev;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.insomniakitten.colourful.data.IJsonData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -47,31 +46,33 @@ public final class JsonStateFactory {
         File file = new File(assets + path);
         try {
             file.getParentFile().mkdirs();
-            file.createNewFile();
-            json.put("forge_marker", 1);
-            if (!defaults.isEmpty()) {
-                defaults.forEach(data -> json.put("defaults", data));
-            }
-            objects.forEach((name, constants) -> {
-                Map<String, Object> values = new HashMap<>();
-                for (E constant : constants) {
-                    if (constant instanceof IJsonData) {
-                        Object data = ((IJsonData) constant).getJsonData();
-                        values.put(constant.getName(), data);
-                    } else {
-                        values.put(constant.getName(), new Object());
+            if (!file.exists()) {
+                file.createNewFile();
+                json.put("forge_marker", 1);
+                if (!defaults.isEmpty()) {
+                    defaults.forEach(data -> json.put("defaults", data));
+                }
+                objects.forEach((name, constants) -> {
+                    Map<String, Object> values = new HashMap<>();
+                    for (E constant : constants) {
+                        if (constant instanceof IBlockstateData) {
+                            Object data = ((IBlockstateData) constant).getDefaults();
+                            values.put(constant.getName(), data);
+                        } else {
+                            values.put(constant.getName(), new Object());
+                        }
                     }
-                }
-                if (!values.isEmpty()) {
-                    variants.put(name, values);
-                }
-            });
-            json.put("variants", variants);
+                    if (!values.isEmpty()) {
+                        variants.put(name, values);
+                    }
+                });
+                json.put("variants", variants);
 
-            try (FileWriter writer = new FileWriter(file)) {
-                GSON.toJson(json, writer);
-            } catch (IOException e) {
-                e.printStackTrace();
+                try (FileWriter writer = new FileWriter(file)) {
+                    GSON.toJson(json, writer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

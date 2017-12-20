@@ -1,0 +1,40 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "end": "colourful:blocks/pillar_end",
+            "side": "colourful:blocks/pillar_side"
+        }
+    },
+    "variants": {
+        "axis": {
+            "x": {
+                "model": "colourful:tinted_pillar_x"
+            },
+            "y": {
+                "model": "colourful:tinted_pillar_y"
+            },
+            "z": {
+                "model": "colourful:tinted_pillar_z"
+            }
+        },
+        "color": {
+            "magenta": { },
+            "pink": { },
+            "green": { },
+            "light_gray": { },
+            "lime": { },
+            "black": { },
+            "yellow": { },
+            "light_blue": { },
+            "brown": { },
+            "cyan": { },
+            "red": { },
+            "orange": { },
+            "gray": { },
+            "blue": { },
+            "white": { },
+            "purple": { }
+        }
+    }
+}

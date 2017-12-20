@@ -18,7 +18,7 @@ public final class Colourful {
 
     public static final Logger LOGGER = LogManager.getLogger(NAME);
 
-    @GameRegistry.ItemStackHolder("colourful:green_bricks_quartz_block")
+    @GameRegistry.ItemStackHolder("colourful:green_metal_bricks")
     public static final ItemStack ICON = ItemStack.EMPTY;
 
     public static final CreativeTabs TAB = new CreativeTabs(Colourful.ID) {

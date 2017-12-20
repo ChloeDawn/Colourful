@@ -3,10 +3,9 @@ package net.insomniakitten.colourful.block;
 import net.insomniakitten.colourful.client.model.PackedModel;
 import net.insomniakitten.colourful.data.BlockColor;
 import net.insomniakitten.colourful.data.BlockMaterial;
-import net.insomniakitten.colourful.data.BlockPattern;
-import net.insomniakitten.colourful.data.BlockType;
+import net.insomniakitten.colourful.data.BlockFormat;
 import net.insomniakitten.colourful.data.PillarAxis;
-import net.insomniakitten.colourful.item.SimpleBlockItem;
+import net.insomniakitten.colourful.item.ColourfulBlockItem;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +13,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -26,8 +26,8 @@ public class ColourfulPillarBlock extends ColourfulBlock {
 
     private static final PropertyEnum<PillarAxis> PROPERTY = PropertyEnum.create("axis", PillarAxis.class);
 
-    public ColourfulPillarBlock(BlockType type, BlockMaterial material, BlockColor color, BlockPattern pattern) {
-        super(type, material, color, pattern);
+    public ColourfulPillarBlock(BlockMaterial material, BlockColor color, BlockFormat format) {
+        super(material, color, format);
     }
 
     @Override
@@ -36,13 +36,13 @@ public class ColourfulPillarBlock extends ColourfulBlock {
     }
 
     @Override
-    public SimpleBlockItem getItem() {
-        return new SimpleBlockItem(this) {
+    public Item getItem() {
+        return new ColourfulBlockItem(this) {
             @Override
             public void addModels(Set<PackedModel> models) {
                 models.add(new PackedModel.Builder(this)
                         .setResourceLocation(modelPath)
-                        .addVariant("axis=y," + modelVariants)
+                        .addVariant("axis=y,color=" + color.getName())
                         .build()
                 );
             }
@@ -54,8 +54,9 @@ public class ColourfulPillarBlock extends ColourfulBlock {
         return new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                String axis = "axis=" + state.getValue(PROPERTY).getName();
-                return new ModelResourceLocation(modelPath, axis + "," + modelVariants);
+                String axis = state.getValue(PROPERTY).getName();
+                String variant = "axis=" + axis + ",color=" + color.getName();
+                return new ModelResourceLocation(modelPath, variant);
             }
         };
     }
