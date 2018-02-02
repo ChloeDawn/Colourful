@@ -20,10 +20,10 @@
                     "particle": "colourful:blocks/pillar_end",
                     "down": "colourful:blocks/pillar_end",
                     "up": "colourful:blocks/pillar_end",
-                    "north": "colourful:blocks/pillar_side_h",
-                    "east": "colourful:blocks/pillar_side_h",
-                    "south": "colourful:blocks/pillar_side_h",
-                    "west": "colourful:blocks/pillar_side_h"
+                    "north": "colourful:blocks/pillar_side_v",
+                    "east": "colourful:blocks/pillar_side_v",
+                    "south": "colourful:blocks/pillar_side_v",
+                    "west": "colourful:blocks/pillar_side_v"
                 }
             },
             "z": {

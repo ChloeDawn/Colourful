@@ -1,0 +1,7 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "pillar",
+        "textures": [ "colourful:blocks/pillar_side_v_ctmv" ]
+    }
+}
