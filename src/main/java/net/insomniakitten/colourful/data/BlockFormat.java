@@ -41,7 +41,6 @@ public enum BlockFormat implements IStringSerializable {
 
     public abstract Block makeInstance(BlockMaterial material, BlockColor color);
 
-
     @Override
     public String getName() {
         return name().toLowerCase(Locale.ROOT);

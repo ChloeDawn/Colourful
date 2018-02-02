@@ -38,7 +38,6 @@ public final class ColourfulRegistry {
                 }
             }
         }
-
     }
 
     @SubscribeEvent
