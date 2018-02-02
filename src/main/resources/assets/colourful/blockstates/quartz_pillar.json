@@ -1,21 +1,42 @@
 {
     "forge_marker": 1,
-    "defaults": {
-        "textures": {
-            "end": "colourful:blocks/pillar_end",
-            "side": "colourful:blocks/pillar_side"
-        }
-    },
     "variants": {
         "axis": {
             "x": {
-                "model": "colourful:tinted_pillar_x"
+                "model": "colourful:tinted_pillar_x",
+                "textures": {
+                    "particle": "colourful:blocks/pillar_end",
+                    "down": "colourful:blocks/pillar_side_h",
+                    "up": "colourful:blocks/pillar_side_h",
+                    "north": "colourful:blocks/pillar_side_h",
+                    "east": "colourful:blocks/pillar_end",
+                    "south": "colourful:blocks/pillar_side_h",
+                    "west": "colourful:blocks/pillar_end"
+                }
             },
             "y": {
-                "model": "colourful:tinted_pillar_y"
+                "model": "colourful:tinted_pillar_y",
+                "textures": {
+                    "particle": "colourful:blocks/pillar_end",
+                    "down": "colourful:blocks/pillar_end",
+                    "up": "colourful:blocks/pillar_end",
+                    "north": "colourful:blocks/pillar_side_h",
+                    "east": "colourful:blocks/pillar_side_h",
+                    "south": "colourful:blocks/pillar_side_h",
+                    "west": "colourful:blocks/pillar_side_h"
+                }
             },
             "z": {
-                "model": "colourful:tinted_pillar_z"
+                "model": "colourful:tinted_pillar_z",
+                "textures": {
+                    "particle": "colourful:blocks/pillar_end",
+                    "down": "colourful:blocks/pillar_side_v",
+                    "up": "colourful:blocks/pillar_side_v",
+                    "north": "colourful:blocks/pillar_end",
+                    "east": "colourful:blocks/pillar_side_h",
+                    "south": "colourful:blocks/pillar_end",
+                    "west": "colourful:blocks/pillar_side_h"
+                }
             }
         },
         "color": {

@@ -1,14 +1,5 @@
 {
     "parent": "block/block",
-    "textures": {
-        "particle": "#side",
-        "down": "#side",
-        "up": "#side",
-        "north": "#side",
-        "east": "#end",
-        "south": "#side",
-        "west": "#end"
-    },
     "elements": [
         {
             "from": [ 0, 0, 0 ],
